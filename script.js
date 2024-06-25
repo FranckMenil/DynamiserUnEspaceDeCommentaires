@@ -9,7 +9,8 @@ const message = document.getElementById("message");
 // Séléctionner et stocker le message d'erreur
 const errorMessage = document.getElementById("error-message");
 
-
+// Séléctionner et stocker la liste de commentaires pour y ajouter le nouveau a la suite
+const commentList = document.getElementById("comment-list");
 
 // Mettre des fonctions au formulaire 
 form.addEventListener("submit" , function(e){
@@ -32,4 +33,28 @@ form.addEventListener("submit" , function(e){
     } else {
         errorMessage.style.display = "none";
     }
+
+    // Creation d'un nouveau commentaire
+    const newComment = document.createElement("div");
+    
+    // Ajout des balises HTML identiques a ceux deja présentes
+    newComment.innerHTML =`
+        <div class="flex space-x-4 text-sm text-gray-500">
+            <div class="flex-1 py-10 border-t border-gray-200">
+                <h3 class="font-medium text-gray-900">${firstNameValue} ${lastNameValue}</h3>
+                <div class="prose prose-sm mt-4 max-w-none text-gray-500">
+                    <p>${messageValue}</p>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Afficher le nouveau commentaire a la suite de la liste
+    commentList.appendChild(newComment);
+
+    // Supprimer le contenu des champs du formulaire une fois le nouveau commentaire
+    // affiché dans la liste
+    form.reset();
+    
+
 });
